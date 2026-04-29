@@ -35,7 +35,7 @@ def parse_protocol(protocol_path: str) -> pd.DataFrame:
 
 
 def load_split_metadata(
-    data_root: str, subset: str = "LA"
+    data_root: str = "/media/allan/T9/data/audio_deepfake_detection/ASVspoof2019/LA", subset: str = "LA"
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """
     Load train/dev/eval protocol files for a given subset (LA or PA).
@@ -60,7 +60,7 @@ def load_split_metadata(
     return dfs["train"], dfs["dev"], dfs["eval"]
 
 
-def get_audio_path(data_root: str, utterance_id: str, subset: str = "LA", split: str = "train") -> str:
+def get_audio_path(data_root: str = "/media/allan/T9/data/audio_deepfake_detection/ASVspoof2019/LA", utterance_id: str = "", subset: str = "LA", split: str = "train") -> str:
     """Resolve full path to a .flac audio file given its utterance ID."""
     split_map = {"train": "train", "dev": "dev", "eval": "eval"}
     audio_dir = Path(data_root) / f"ASVspoof2019_{subset}_{'cm_' if subset == 'LA' else ''}train" \
