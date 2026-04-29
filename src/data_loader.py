@@ -94,8 +94,11 @@ class ASVspoofDataset(Dataset):
         self.transform = transform
 
         # Filter to only utterances that have extracted features
+        # p.name = "LA_T_000001_bonafide_mfcc.npy" → strip "_mfcc.npy" to get utterance_id
+        suffix = f"_{feature_type}.npy"
         available = set(
-            p.stem for p in self.features_dir.glob(f"*_{feature_type}.npy")
+            p.name[: -len(suffix)]
+            for p in self.features_dir.glob(f"*_{feature_type}.npy")
         )
         self.metadata = metadata[metadata["utterance_id"].isin(available)].reset_index(drop=True)
 
